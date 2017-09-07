@@ -270,7 +270,8 @@ namespace SharePointPOCLargeLIstPaging.LargeListPagingWebPart
                     {
                         fieldName = "Created";
                         DateTime createdDate = Convert.ToDateTime(item["Created"]);
-                        fieldValue = createdDate.ToString("yyyyMMdd HH:mm:ss");
+                        DateTime Timestamp = item.Web.RegionalSettings.TimeZone.LocalTimeToUTC(createdDate);
+                        fieldValue = Timestamp.ToString("yyyyMMdd HH:mm:ss");
                     }
                     break;
                 case "ModifiedAsc":
@@ -278,8 +279,8 @@ namespace SharePointPOCLargeLIstPaging.LargeListPagingWebPart
                     {
                         fieldName = "Modified";
                         DateTime modifiedDate = Convert.ToDateTime(item["Modified"]);
-                       
-                        fieldValue = modifiedDate.ToString("yyyyMMdd HH:mm:ss");
+                        DateTime Timestamp = item.Web.RegionalSettings.TimeZone.LocalTimeToUTC(modifiedDate);
+                        fieldValue = Timestamp.ToString("yyyyMMdd HH:mm:ss");
                     }
                     break;
                 case "IdAsc":
@@ -295,7 +296,7 @@ namespace SharePointPOCLargeLIstPaging.LargeListPagingWebPart
                         fieldName = "Title";
                         fieldValue = Convert.ToString(item["Title"]);
                     }
-                    break;
+				break;
             }
             fieldValue = SPEncode.UrlEncode(fieldValue);
 
